@@ -1,0 +1,119 @@
+# kubectl get devworkspacetemplate che-code-workspace40d5c314bea044ab -o yaml
+
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspaceTemplate
+metadata:
+  annotations:
+    che.eclipse.org/components-update-policy: managed
+    che.eclipse.org/plugin-registry-url: https://company.dev/plugin-registry/v3/plugins/che-incubator/che-code/insiders/devfile.yaml
+  creationTimestamp: "2022-01-28T21:40:31Z"
+  generation: 2
+  managedFields:
+  - apiVersion: workspace.devfile.io/v1alpha2
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:che.eclipse.org/components-update-policy: {}
+          f:che.eclipse.org/plugin-registry-url: {}
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"40d5c314-bea0-44ab-926d-dbe6c1315b5d"}:
+            .: {}
+            f:apiVersion: {}
+            f:kind: {}
+            f:name: {}
+            f:uid: {}
+      f:spec:
+        .: {}
+        f:commands: {}
+        f:components: {}
+        f:events:
+          .: {}
+          f:preStart: {}
+    manager: unknown
+    operation: Update
+    time: "2022-01-28T21:40:31Z"
+  name: che-code-workspace40d5c314bea044ab
+  namespace: dev-studio-workspace-nm-company-com-zsobsb
+  ownerReferences:
+  - apiVersion: workspace.devfile.io/v1alpha2
+    kind: devworkspace
+    name: devfile-test-vscode
+    uid: 40d5c314-bea0-44ab-926d-dbe6c1315b5d
+  resourceVersion: "324012003"
+  uid: d3069101-d9c1-4e2f-82bb-5be54bb88f28
+spec:
+  commands:
+  - apply:
+      component: che-code-injector
+    id: init-container-command
+  components:
+  - attributes:
+      app.kubernetes.io/component: che-code-runtime
+      app.kubernetes.io/part-of: che-code.eclipse.org
+    container:
+      command:
+      - /checode/entrypoint-volume.sh
+      cpuLimit: 500m
+      cpuRequest: 30m
+      endpoints:
+      - attributes:
+          cookiesAuthEnabled: true
+          discoverable: false
+          type: main
+          urlRewriteSupported: true
+        exposure: public
+        name: che-code
+        path: ?tkn=eclipse-che
+        protocol: https
+        secure: false
+        targetPort: 3100
+      - attributes:
+          discoverable: false
+          urlRewriteSupported: true
+        exposure: public
+        name: code-redirect-1
+        protocol: http
+        targetPort: 13131
+      - attributes:
+          discoverable: false
+          urlRewriteSupported: true
+        exposure: public
+        name: code-redirect-2
+        protocol: http
+        targetPort: 13132
+      - attributes:
+          discoverable: false
+          urlRewriteSupported: true
+        exposure: public
+        name: code-redirect-3
+        protocol: http
+        targetPort: 13133
+      image: quay.io/devfile/universal-developer-image:ubi8-770ea4a
+      memoryLimit: 1024Mi
+      memoryRequest: 256Mi
+      sourceMapping: /projects
+      volumeMounts:
+      - name: checode
+        path: /checode
+    name: che-code-runtime-description
+  - name: checode
+    volume: {}
+  - container:
+      command:
+      - /entrypoint-init-container.sh
+      cpuLimit: 500m
+      cpuRequest: 30m
+      image: quay.io/che-incubator/che-code@sha256:398866d27a8c8b60b9c6bdf0d85d47e55d092c647c897c71a979f9b23982ace5
+      memoryLimit: 128Mi
+      memoryRequest: 32Mi
+      sourceMapping: /projects
+      volumeMounts:
+      - name: checode
+        path: /checode
+    name: che-code-injector
+  events:
+    preStart:
+    - init-container-command
