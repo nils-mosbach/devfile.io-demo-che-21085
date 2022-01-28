@@ -1,3 +1,5 @@
+# kubectl get devworkspacetemplate che-code-workspace40d5c314bea044ab -o yaml
+
 apiVersion: workspace.devfile.io/v1alpha2
 kind: DevWorkspaceTemplate
 metadata:
