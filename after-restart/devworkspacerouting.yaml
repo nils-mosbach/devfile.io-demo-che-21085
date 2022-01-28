@@ -1,0 +1,157 @@
+apiVersion: controller.devfile.io/v1alpha1
+kind: DevWorkspaceRouting
+metadata:
+  annotations:
+    controller.devfile.io/devworkspace-started: "false"
+  creationTimestamp: "2022-01-28T21:40:31Z"
+  finalizers:
+  - devworkspacerouting.controller.devfile.io
+  generation: 2
+  labels:
+    controller.devfile.io/devworkspace_id: workspace40d5c314bea044ab
+  managedFields:
+  - apiVersion: controller.devfile.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:controller.devfile.io/devworkspace-started: {}
+        f:labels:
+          .: {}
+          f:controller.devfile.io/devworkspace_id: {}
+        f:ownerReferences: {}
+      f:spec:
+        .: {}
+        f:devworkspaceId: {}
+        f:endpoints:
+          .: {}
+          f:nodejsdev: {}
+        f:podSelector:
+          .: {}
+          f:controller.devfile.io/devworkspace_id: {}
+        f:routingClass: {}
+    manager: devworkspace-controller
+    operation: Update
+    time: "2022-01-28T21:40:31Z"
+  - apiVersion: controller.devfile.io/v1alpha1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:finalizers: {}
+      f:status:
+        .: {}
+        f:exposedEndpoints:
+          .: {}
+          f:nodejsdev: {}
+    manager: manager
+    operation: Update
+    time: "2022-01-28T21:40:31Z"
+  name: routing-workspace40d5c314bea044ab
+  namespace: dev-studio-workspace-nm-company-com-zsobsb
+  ownerReferences:
+  - apiVersion: workspace.devfile.io/v1alpha2
+    blockOwnerDeletion: true
+    controller: true
+    kind: DevWorkspace
+    name: devfile-test-vscode
+    uid: 40d5c314-bea0-44ab-926d-dbe6c1315b5d
+  resourceVersion: "324014561"
+  uid: 522d560e-4167-4c29-8a6c-0358a8fb3e5d
+spec:
+  devworkspaceId: workspace40d5c314bea044ab
+  endpoints:
+    nodejsdev:
+    - exposure: internal
+      name: nodejs
+      protocol: http
+      targetPort: 3000
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        cookiesAuthEnabled: true
+        discoverable: false
+        type: main
+        urlRewriteSupported: true
+      exposure: public
+      name: che-code
+      path: ?tkn=eclipse-che
+      protocol: https
+      targetPort: 3100
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        discoverable: false
+        urlRewriteSupported: true
+      exposure: public
+      name: code-redirect-1
+      protocol: http
+      targetPort: 13131
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        discoverable: false
+        urlRewriteSupported: true
+      exposure: public
+      name: code-redirect-2
+      protocol: http
+      targetPort: 13132
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        discoverable: false
+        urlRewriteSupported: true
+      exposure: public
+      name: code-redirect-3
+      protocol: http
+      targetPort: 13133
+  podSelector:
+    controller.devfile.io/devworkspace_id: workspace40d5c314bea044ab
+  routingClass: che
+status:
+  exposedEndpoints:
+    nodejsdev:
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        cookiesAuthEnabled: true
+        discoverable: false
+        type: main
+        urlRewriteSupported: true
+      name: che-code
+      url: https://company.dev/workspace40d5c314bea044ab/nodejsdev/3100/?tkn=eclipse-che
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        discoverable: false
+        urlRewriteSupported: true
+      name: code-redirect-1
+      url: https://company.dev/workspace40d5c314bea044ab/nodejsdev/13131/
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        discoverable: false
+        urlRewriteSupported: true
+      name: code-redirect-2
+      url: https://company.dev/workspace40d5c314bea044ab/nodejsdev/13132/
+    - attributes:
+        contributed-by: che-code.eclipse.org
+        discoverable: false
+        urlRewriteSupported: true
+      name: code-redirect-3
+      url: https://company.dev/workspace40d5c314bea044ab/nodejsdev/13133/
+  message: DevWorkspaceRouting prepared
+  phase: Ready
+  podAdditions:
+    containers:
+    - image: quay.io/eclipse/che--traefik:v2.5.0-eb30f9f09a65cee1fab5ef9c64cb4ec91b800dc3fdd738d62a9d4334f0114683
+      imagePullPolicy: IfNotPresent
+      name: che-gateway
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 50m
+          memory: 64Mi
+      volumeMounts:
+      - mountPath: /etc/traefik
+        name: che-gateway
+    volumes:
+    - configMap:
+        defaultMode: 420
+        name: workspace40d5c314bea044ab-route
+      name: che-gateway
