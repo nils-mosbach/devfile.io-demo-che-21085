@@ -1,0 +1,21 @@
+schemaVersion: 2.1.0
+metadata:
+  name: devfile-test-vscode
+components:
+
+  # Development Tooling
+  - name: nodejsdev
+    container:
+      image: quay.io/devfile/universal-developer-image:ubi8-b452131
+      endpoints:
+        - exposure: internal # public
+          name: nodejs
+          protocol: http
+          targetPort: 3000
+      env:
+        - name: DEVWORKSPACE_CREATOR
+          value: mosbachn
+        - name: _BUILDAH_STARTED_IN_USERNS
+          value: test
+      memoryLimit: 1G
+      mountSources: true
