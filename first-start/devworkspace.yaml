@@ -1,0 +1,180 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspace
+metadata:
+  annotations:
+    che.eclipse.org/che-editor: che-incubator/che-code/insiders
+    che.eclipse.org/last-updated-timestamp: "2022-01-28T21:40:30.049Z"
+    controller.devfile.io/started-at: "1643406053903"
+  creationTimestamp: "2022-01-28T21:40:31Z"
+  finalizers:
+  - storage.controller.devfile.io
+  generation: 2
+  labels:
+    controller.devfile.io/creator: ""
+  managedFields:
+  - apiVersion: workspace.devfile.io/v1alpha2
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:che.eclipse.org/che-editor: {}
+          f:che.eclipse.org/last-updated-timestamp: {}
+      f:spec:
+        .: {}
+        f:routingClass: {}
+        f:started: {}
+        f:template:
+          .: {}
+          f:components: {}
+          f:projects: {}
+    manager: unknown
+    operation: Update
+    time: "2022-01-28T21:40:31Z"
+  - apiVersion: workspace.devfile.io/v1alpha2
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          f:controller.devfile.io/started-at: {}
+        f:finalizers:
+          .: {}
+          v:"storage.controller.devfile.io": {}
+      f:status:
+        .: {}
+        f:conditions: {}
+        f:devworkspaceId: {}
+        f:mainUrl: {}
+        f:message: {}
+        f:phase: {}
+    manager: devworkspace-controller
+    operation: Update
+    time: "2022-01-28T21:41:01Z"
+  name: devfile-test-vscode
+  namespace: dev-studio-workspace-nm-company-com-zsobsb
+  resourceVersion: "324011763"
+  uid: 40d5c314-bea0-44ab-926d-dbe6c1315b5d
+spec:
+  routingClass: che
+  started: true
+  template:
+    components:
+    - attributes:
+        che-code.eclipse.org/contribute-cpuLimit: true
+        che-code.eclipse.org/contribute-cpuRequest: true
+        che-code.eclipse.org/contribute-endpoint/che-code: 3100
+        che-code.eclipse.org/contribute-endpoint/code-redirect-1: 13131
+        che-code.eclipse.org/contribute-endpoint/code-redirect-2: 13132
+        che-code.eclipse.org/contribute-endpoint/code-redirect-3: 13133
+        che-code.eclipse.org/contribute-entry-point: true
+        che-code.eclipse.org/contribute-memoryLimit: true
+        che-code.eclipse.org/contribute-memoryRequest: true
+        che-code.eclipse.org/contribute-volume-mount/checode: /checode
+        che-code.eclipse.org/contributed-container: nodejsdev
+        che-code.eclipse.org/original-memoryLimit: 1G
+      container:
+        command:
+        - /checode/entrypoint-volume.sh
+        cpuLimit: 500m
+        cpuRequest: 30m
+        endpoints:
+        - exposure: internal
+          name: nodejs
+          protocol: http
+          targetPort: 3000
+        - attributes:
+            contributed-by: che-code.eclipse.org
+            cookiesAuthEnabled: true
+            discoverable: false
+            type: main
+            urlRewriteSupported: true
+          exposure: public
+          name: che-code
+          path: ?tkn=eclipse-che
+          protocol: https
+          secure: false
+          targetPort: 3100
+        - attributes:
+            contributed-by: che-code.eclipse.org
+            discoverable: false
+            urlRewriteSupported: true
+          exposure: public
+          name: code-redirect-1
+          protocol: http
+          targetPort: 13131
+        - attributes:
+            contributed-by: che-code.eclipse.org
+            discoverable: false
+            urlRewriteSupported: true
+          exposure: public
+          name: code-redirect-2
+          protocol: http
+          targetPort: 13132
+        - attributes:
+            contributed-by: che-code.eclipse.org
+            discoverable: false
+            urlRewriteSupported: true
+          exposure: public
+          name: code-redirect-3
+          protocol: http
+          targetPort: 13133
+        image: quay.io/devfile/universal-developer-image:ubi8-b452131
+        memoryLimit: 2.07G
+        memoryRequest: 256Mi
+        mountSources: true
+        sourceMapping: /projects
+        volumeMounts:
+        - name: checode
+          path: /checode
+      name: nodejsdev
+    - name: che-code-workspace40d5c314bea044ab
+      plugin:
+        kubernetes:
+          name: che-code-workspace40d5c314bea044ab
+          namespace: dev-studio-workspace-nm-company-com-zsobsb
+    projects:
+    - git:
+        remotes:
+          origin: https://github.com/nils-mosbach/devfile.io-demo-che-21085.git
+      name: devfile-io-demo-che-21085
+status:
+  conditions:
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: No warnings in processing DevWorkspace
+    status: "False"
+    type: DevWorkspaceWarning
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: DevWorkspace is starting
+    status: "True"
+    type: Started
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: Resolved plugins and parents from DevWorkspace
+    status: "True"
+    type: DevWorkspaceResolved
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: Storage ready
+    status: "True"
+    type: StorageReady
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: Networking ready
+    status: "True"
+    type: RoutingReady
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: DevWorkspace serviceaccount ready
+    status: "True"
+    type: ServiceAccountReady
+  - lastTransitionTime: "2022-01-28T21:40:24Z"
+    message: DevWorkspace secrets ready
+    status: "True"
+    type: PullSecretsReady
+  - lastTransitionTime: "2022-01-28T21:40:53Z"
+    message: DevWorkspace deployment ready
+    status: "True"
+    type: DeploymentReady
+  - lastTransitionTime: "2022-01-28T21:40:53Z"
+    status: "True"
+    type: Ready
+  devworkspaceId: workspace40d5c314bea044ab
+  mainUrl: https://company.dev/workspace40d5c314bea044ab/nodejsdev/3100/?tkn=eclipse-che
+  message: https://company.dev/workspace40d5c314bea044ab/nodejsdev/3100/?tkn=eclipse-che
+  phase: Running
